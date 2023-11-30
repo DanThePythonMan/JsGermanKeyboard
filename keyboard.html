@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      font-size: 25px;
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+    }
+
+    #textBoxContainer {
+      border-style: groove;
+      height: 150px;
+      font-size: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #textBox {
+      width: 80%;
+    }
+
+    table {
+      margin-top: 20px;
+    }
+
+    td {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div style="width:50%" id="textBoxContainer" spellcheck="false">
+    <p style="width:100%;height:100%;"contenteditable="true" id="textBox"></p>
+  </div>
+
+  <table>
+    <tr>
+      <td><button onclick="addChar('Ä')">Ä</button></td>
+      <td><button onclick="addChar('Ö')">Ö</button></td>
+      <td><button onclick="addChar('Ü')">Ü</button></td>
+      <td><button onclick="addChar('ẞ')">ẞ</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="addChar('ä')">ä</button></td>
+      <td><button onclick="addChar('ö')">ö</button></td>
+      <td><button onclick="addChar('ü')">ü</button></td>
+      <td><button onclick="addChar('ß')">ß</button></td>
+    </tr>
+  </table>
+
+  <script>
+    const elem = document.getElementById("textBox");
+
+    elem.addEventListener("keydown", function (event) {
+      if (event.key == "=") {
+        event.preventDefault();
+
+        let selection = window.getSelection();
+        let range = selection.getRangeAt(0);
+        let cursorPos = range.startOffset;
+        let workingStr = elem.innerText;
+        let char = workingStr[cursorPos - 1];
+        let updatedChar = "";
+
+        switch (char) {
+          case "a":
+            updatedChar = "ä";
+            break;
+          case "o":
+            updatedChar = "ö";
+            break;
+          case "u":
+            updatedChar = "ü";
+            break;
+          case "s":
+            updatedChar = "ß";
+            break;
+          case "A":
+            updatedChar = "Ä";
+            break;
+          case "O":
+            updatedChar = "Ö";
+            break;
+          case "U":
+            updatedChar = "Ü";
+            break;
+          case "S":
+            updatedChar = "ẞ";
+            break;
+          default:
+            updatedChar = char;
+        }
+
+        workingStr = workingStr.substring(0, cursorPos - 1) + updatedChar + workingStr.substring(cursorPos);
+	if (workingStr.slice(0,9) == "undefined"){
+	workingStr=""
+}
+        elem.innerText = workingStr;
+        range.setStart(elem.firstChild, cursorPos);
+        range.setEnd(elem.firstChild, cursorPos);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    });
+
+    function addChar(char) {
+      document.execCommand('insertText', false, char);
+    }
+  </script>
+</body>
+</html>
