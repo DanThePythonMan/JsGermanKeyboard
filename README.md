@@ -9,5 +9,5 @@ u -> ü
 s -> ß
 (works with relevant capitals as well)
 
-### Control + Minus key
+### ***Control*** + Minus key
 Copies text to the clipboard
