@@ -105,13 +105,24 @@
         return false;
     }
 
-      console.log("updated char: " + updatedChar)
+      
       let workingStr = string.substring(0, cursorPos - 1) + updatedChar + string.substring(cursorPos);
-      console.log(workingStr)
       elem.value = workingStr
       return true
         }
       
+        function copy(){
+          navigator.clipboard.writeText(elem.value)
+        }
+
+        elem.addEventListener("keydown", function (event){
+          if (event.key == "-" && event.ctrlKey){
+            
+            event.preventDefault()
+            copy()
+          }
+        })
+
     </script>
 
 </body>
