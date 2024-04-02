@@ -40,6 +40,17 @@
           class="btn btn-secondary">ß</button></td>
     </tr>
   </table>
+  <table>
+    <tr>
+      <td><button onclick="clear_text()" style="width:75px"
+          class="btn btn-secondary">Clear</button></td>
+      <td><button style="width:75px"
+          onclick="copy()"
+          class="btn btn-secondary">Copy</button></td>
+      <td><button style="width:75px" onclick='wordref()'
+          class="btn btn-secondary">WR</button></td>
+    </tr>
+  </table>
   <a href="https://github.com/DanThePythonMan/JsGermanKeyboard">
     <img class="logo" src="assets/Logo.png"
       alt="made by DanThePythonMan at https://github.com/DanThePythonMan" />
@@ -122,7 +133,9 @@
             copy()
           }
         })
-
+        function wordref(){
+          open("https://www.wordreference.com/deen/")
+        }
     </script>
 
 </body>
